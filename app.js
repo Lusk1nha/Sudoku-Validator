@@ -1,6 +1,4 @@
-const Schema = require('./sudoku-schema.js')
-
-// * The Sudoku game Schema should have only numbers.
+const Schema = require('./default-sudoku-schema.js')
 
 const Validate = Game => {
   for ( let RowGame of Game ) {
@@ -18,6 +16,8 @@ const Validate = Game => {
   return true, console.log('true')
 }
 
+
+// Checking each Sudoku Game row.
 const RowValidate = Row => {
   for ( let number of Row ) {
     const totalRow = Row.filter(Element => Element === number)
@@ -27,6 +27,7 @@ const RowValidate = Row => {
   return true
 }
 
+// Checking each Sudoku Game column.
 const ColumnValidate = (Game, ColumnIndex) => {
   const Column = []
   for ( let Row = 0; Row != 9; Row++) {
@@ -41,6 +42,7 @@ const ColumnValidate = (Game, ColumnIndex) => {
   return true
 }
 
+// Checking each Sudoku Game quadrant(3x3).
 const QuadrantValidate = (Game, ColumnIndex) => {
   for ( let i = 0; i != 9; i += 3 ) {
     const QuadrantArray = Game[ColumnIndex].slice(i, i+3).concat(Game[ColumnIndex+1].slice(i, i+3), Game[ColumnIndex+2].slice(i, i+3))
@@ -54,17 +56,23 @@ const QuadrantValidate = (Game, ColumnIndex) => {
   return true
 }
 
-Schema.forEach(Game => Validate(Game)) // Default Sudoku Schema of Games
 
+// Default Sudoku Schema of Games 
+Schema.forEach(Game => Validate(Game)) // If you want input your on Game delete this
 
-// Validate([ // Use this to input your Sudoku Game
-//   [5, 3, 4, 6, 7, 8, 9, 1, 2],
-//   [6, 7, 2, 1, 9, 5, 3, 4, 8],
-//   [1, 9, 8, 3, 4, 2, 5, 6, 7],
-//   [8, 5, 9, 7, 6, 1, 4, 2, 3],
-//   [4, 2, 6, 8, 5, 3, 7, 9, 1],
-//   [7, 1, 3, 9, 2, 4, 8, 5, 6],
-//   [9, 6, 1, 5, 3, 7, 2, 8, 4],
-//   [2, 8, 7, 4, 1, 9, 6, 3, 5],
-//   [3, 4, 5, 2, 8, 6, 1, 7, 9],
-// ])
+// Validate('Set your Sudoku Game here')
+
+/*
+Example Input:
+  Validate([ 
+    [5, 3, 4, 6, 7, 8, 9, 1, 2], // Valid Sudoku game
+    [6, 7, 2, 1, 9, 5, 3, 4, 8],
+    [1, 9, 8, 3, 4, 2, 5, 6, 7],
+    [8, 5, 9, 7, 6, 1, 4, 2, 3],
+    [4, 2, 6, 8, 5, 3, 7, 9, 1],
+    [7, 1, 3, 9, 2, 4, 8, 5, 6],
+    [9, 6, 1, 5, 3, 7, 2, 8, 4],
+    [2, 8, 7, 4, 1, 9, 6, 3, 5],
+    [3, 4, 5, 2, 8, 6, 1, 7, 9],
+  ])
+*/
